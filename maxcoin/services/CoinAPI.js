@@ -18,7 +18,7 @@ class CoinAPI {
     return [year, month, day].join("-");
   }
 
-  async fetch() {
+  async fetch() { 
     const today = new Date();
     const end = this.formatDate(today);
     const start = this.formatDate(today.setFullYear(today.getFullYear() - 5));
