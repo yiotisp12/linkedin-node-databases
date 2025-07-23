@@ -2,7 +2,7 @@ const axios = require("axios");
 
 class CoinAPI {
   constructor() {
-    this.apiUrl = "https://api.coindesk.com/v1/bpi/historical/close.json";
+    this.apiUrl = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=1825";
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -22,7 +22,7 @@ class CoinAPI {
     const today = new Date();
     const end = this.formatDate(today);
     const start = this.formatDate(today.setFullYear(today.getFullYear() - 5));
-    const url = `${this.apiUrl}?start=${start}&end=${end}`;
+    const url = this.apiUrl; /* `${this.apiUrl}?start=${start}&end=${end}`; */
     const response = await axios.get(url);
     return response.data;
   }
