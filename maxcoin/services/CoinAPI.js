@@ -22,7 +22,7 @@ class CoinAPI {
     const today = new Date();
     const end = this.formatDate(today);
     const start = this.formatDate(today.setFullYear(today.getFullYear() - 5));
-    const url = this.apiUrl; /* `${this.apiUrl}?start=${start}&end=${end}`; */
+    const url = /* this.apiUrl; */ `${this.apiUrl}?start=${start}&end=${end}`; 
     const response = await axios.get(url);
     return response.data;
   }
