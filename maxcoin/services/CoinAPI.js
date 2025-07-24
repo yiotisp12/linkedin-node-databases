@@ -1,8 +1,9 @@
 const axios = require("axios");
-
+// This apiUrl is not original, had to replace api due to monetization issues with the original API.
 class CoinAPI {
   constructor() {
-    this.apiUrl = "https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=1825";
+    this.apiUrl =
+      "https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=1825";
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -18,12 +19,12 @@ class CoinAPI {
     return [year, month, day].join("-");
   }
 
-  async fetch() { 
-    const today = new Date();
-    const end = this.formatDate(today);
-    const start = this.formatDate(today.setFullYear(today.getFullYear() - 5));
-    const url = /* this.apiUrl; */ `${this.apiUrl}?start=${start}&end=${end}`; 
-    const response = await axios.get(url);
+  async fetch() {
+    // const today = new Date();
+    // const start = this.formatDate(today.setFullYear(today.getFullYear() - 5));
+    // const end = this.formatDate(today);
+    // const url = `${this.apiUrl}?start=${start}&end=${end}`;
+    const response = await axios.get(this.apiUrl);
     return response.data;
   }
 }
