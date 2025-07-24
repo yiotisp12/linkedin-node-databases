@@ -82,7 +82,9 @@ class MongoBackend {
     const insertResult = await this.insert();
     console.timeEnd("mongodb-insert");
     // npm start for Inserting => TypeError: Cannot convert undefined or null to object
-    console.info(`Inserted ${insertResult.result.n} documents into MongoDB`);
+    console.info(
+      `Inserted ${insertResult.insertedCount} documents into MongoDB`
+    );
     // Changed api url in CoinAPI.js but copied data manually from the original...
     // API to follow instructions in data.json, see CoinAPI.js for more info.
     console.info("Disconnecting from MongoDB...");
