@@ -61,7 +61,9 @@ class MongoBackend {
     return this.collection.insertMany(documents);
   } */
 
-  async getMax() {}
+  async getMax() {
+    return this.collection.findOne({}, { sort: { value: 1 } });
+  }
 
   async max() {
     console.info("Connecting to MongoDB...");
@@ -81,18 +83,28 @@ class MongoBackend {
     console.time("mongodb-insert");
     const insertResult = await this.insert();
     console.timeEnd("mongodb-insert");
-    // npm start for Inserting => TypeError: Cannot convert undefined or null to object
+
     console.info(
       `Inserted ${insertResult.insertedCount} documents into MongoDB`
     );
+
+    console.info("Querying MongoDB...");
+    console.time("mongodb-find");
+    const doc = await this.getMax();
+    console.timeEnd("mongodb-find");
+
     // Changed api url in CoinAPI.js but copied data manually from the original...
     // API to follow instructions in data.json, see CoinAPI.js for more info.
     console.info("Disconnecting from MongoDB...");
     console.time("mongodb-disconnect");
     await this.disconnect();
     console.timeEnd("mongodb-disconnect");
-  } // Due to the data fetch mismatch, this function won't work as expected.
-} // 3. Use Document Databases with Node.js - Part 4: Insert data into MongoDB
-// This course was created in 2021, following along getting increasingly difficult.
+
+    return {
+      date: doc.date,
+      value: doc.value,
+    };
+  }
+}
 
 module.exports = MongoBackend;
