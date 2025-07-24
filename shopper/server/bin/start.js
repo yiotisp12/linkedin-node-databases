@@ -11,6 +11,7 @@ async function connectToMongoose() {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useCreateIndex: true,-> This option is deprecated in Mongoose 6+, remove it.
+    // useFindAndModify: false, This option is also deprecated, remove it.
   });
 }
 
