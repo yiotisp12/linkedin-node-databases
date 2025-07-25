@@ -48,19 +48,6 @@ class MongoBackend {
     return this.collection.insertMany(documents);
   }
 
-  // This function is not used in the current implementation, but can be used to insert data.
-  /* async insert() {
-    const data = await this.coinAPI.fetch();
-    const documents = [];
-    Object.entries(data.bpi).forEach((entry) => {
-      documents.push({
-        date: entry[0],
-        value: entry[1],
-      });
-    });
-    return this.collection.insertMany(documents);
-  } */
-
   async getMax() {
     return this.collection.findOne({}, { sort: { value: 1 } });
   }
@@ -68,13 +55,6 @@ class MongoBackend {
   async max() {
     console.info("Connecting to MongoDB...");
     console.time("mongodb-connect");
-    /* const client = await this.connect(); !ORIGINAL CODE IS OUTDATED DOESNT WORK!
-    if (client.isConnected()) {
-      console.info("Successfully connected to MongoDB");
-    } else {
-      throw new Error("Failed to connect to MongoDB");
-    }
-    console.timeEnd("mongodb-connect"); */
     await this.connect();
     console.info("Successfully connected to MongoDB");
     console.timeEnd("mongodb-connect");
@@ -93,8 +73,6 @@ class MongoBackend {
     const doc = await this.getMax();
     console.timeEnd("mongodb-find");
 
-    // Changed api url in CoinAPI.js but copied data manually from the original...
-    // API to follow instructions in data.json, see CoinAPI.js for more info.
     console.info("Disconnecting from MongoDB...");
     console.time("mongodb-disconnect");
     await this.disconnect();
