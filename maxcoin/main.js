@@ -11,6 +11,12 @@ async function runRedis() {
   return redisBackend.max();
 }
 
+runMongo()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => console.error(err));
+
 runRedis()
   .then((result) => {
     console.log(result);
